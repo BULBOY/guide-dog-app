@@ -66,8 +66,27 @@ function ObjectItem({ object, highContrastMode, isClosest }) {
     }
   }
   
+  // Determine border style based on distance
+  const getBorderStyle = () => {
+    const color = getColor().replace('text-', '')
+    
+    // Closer objects get thicker borders
+    const thickness = distance < 1.5 ? '4px' : distance < 3 ? '3px' : '2px'
+    
+    // Border style
+    const style = distance < 3 ? 'solid' : 'dashed'
+    
+    return {
+      border: `${thickness} ${style} var(--color-${color})`,
+      boxShadow: distance < 3 ? `0 0 10px var(--color-${color})` : 'none'
+    }
+  }
+  
   return (
-    <div className={`object-item p-2 rounded ${isClosest ? (highContrastMode ? 'bg-gray-800' : 'bg-blue-100') : ''}`}>
+    <div 
+      className={`object-item p-2 rounded ${isClosest ? (highContrastMode ? 'bg-gray-800' : 'bg-blue-100') : ''}`}
+      style={getBorderStyle()}
+    >
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-2xl mr-2" aria-hidden="true">{getPositionArrow()}</span>

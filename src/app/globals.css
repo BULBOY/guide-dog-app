@@ -483,6 +483,80 @@ button:disabled {
 /* Object Detection Visualization */
 .object-item {
   margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.object-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Object frames */
+.object-frame {
+  border: 2px solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.object-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  margin: 3px;
+}
+
+/* Color variables for frames */
+:root {
+  /* Original color variables... */
+  
+  /* Frame colors */
+  --color-red-600: #dc2626;
+  --color-red-400: #f87171;
+  --color-orange-600: #ea580c;
+  --color-orange-400: #fb923c;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-400: #facc15;
+  --color-green-600: #10b981;
+  --color-green-400: #4ade80;
+}
+
+/* Animated highlight for close objects */
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse-border 2s infinite;
+}
+
+/* Canvas highlights */
+.canvas-highlight {
+  position: absolute;
+  pointer-events: none;
+  border: 3px solid;
+  z-index: 10;
+}
+
+/* High contrast object frames */
+.high-contrast-mode .object-item {
+  border-color: #ffffff;
+}
+
+.high-contrast-mode .object-item.danger {
+  border-color: #ff4040;
 }
 
 /* Camera Status Indicators */

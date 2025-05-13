@@ -401,19 +401,47 @@ export default function Navigation() {
       if (obj.distance < 2) color = 'red'
       else if (obj.distance < 4) color = 'orange'
       
-      // Draw box
+      // Draw outer frame (shadow effect)
+      ctx.lineWidth = 8
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)'
+      ctx.strokeRect(x - 2, y - 2, width + 4, height + 4)
+      
+      // Draw main colored box
       ctx.strokeStyle = color
-      ctx.lineWidth = 3
+      ctx.lineWidth = 4
       ctx.strokeRect(x, y, width, height)
+      
+      // Add a semi-transparent background for the text
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)'
+      const textY = y > 30 ? y - 10 : y + height + 25
+      ctx.fillRect(x, textY - 18, width, 24)
       
       // Draw label
       ctx.fillStyle = color
       ctx.font = 'bold 16px Arial'
       ctx.fillText(
         `${obj.label} (${obj.distance.toFixed(1)}m)`,
-        x, 
-        y > 20 ? y - 5 : y + height + 20
+        x + 4, 
+        textY
       )
+      
+      // Draw position arrow
+      const arrowSize = 24
+      const arrowX = x + width / 2 - arrowSize / 2
+      const arrowY = y + height + 5
+      
+      ctx.fillStyle = color
+      ctx.font = `bold ${arrowSize}px Arial`
+      
+      // Draw different arrows based on position
+      let arrow = '↑'
+      if (obj.position === 'left') arrow = '←'
+      if (obj.position === 'right') arrow = '→'
+      
+      // Only draw arrow if there's enough room below the object
+      if (arrowY + arrowSize < ctx.canvas.height - 10) {
+        ctx.fillText(arrow, arrowX, arrowY + arrowSize)
+      }
     })
   }
   
@@ -503,6 +531,7 @@ export default function Navigation() {
           onFrame={processFrame}
           style={{ display: highContrastMode ? 'none' : 'block' }}
           selectedCamera={selectedCamera}
+          detectedObjects={detectedObjects} // Pass detected objects for framing
         />
         
         <canvas 
