@@ -134,7 +134,7 @@ export default function Navigation() {
           const objectSize = width * height
           const frameSize = frameWidth * videoElement.videoHeight
           const sizeRatio = objectSize / frameSize
-          const estimatedDistance = 5 / Math.sqrt(sizeRatio)
+          const estimatedDistance = 0.8 / Math.sqrt(sizeRatio)
           
           return {
             label,

@@ -55,22 +55,7 @@ export default function Home() {
           
           <div className="p-6 bg-blue-100 rounded-lg mb-8">
             <p className="text-lg">Tap anywhere on screen to start</p>
-          </div>
-          
-          <div className="features">
-            <div className="feature">
-              <h3 className="font-bold">Object Detection</h3>
-              <p>Identifies obstacles and objects around you</p>
-            </div>
-            <div className="feature">
-              <h3 className="font-bold">Audio Guidance</h3>
-              <p>Provides spoken directions and alerts</p>
-            </div>
-            <div className="feature">
-              <h3 className="font-bold">Voice Control</h3>
-              <p>Control the app with voice commands</p>
-            </div>
-          </div>
+          </div>        
         </div>
       )}
       
